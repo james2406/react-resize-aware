@@ -19,11 +19,7 @@ const style = {
 
 // This automatically attaches to itself the resize event listener
 // and adds onResize as callback
-export default ({
-  onResize,
-}: {
-  onResize: (React.ElementRef<any>) => void,
-}) => {
+export default ({ onResize }) => {
   const ref = React.useRef();
   useOnResize(ref, () => onResize(ref));
 

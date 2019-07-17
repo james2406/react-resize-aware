@@ -2,13 +2,13 @@
 import * as React from 'react';
 import ResizeListener from './ResizeListener';
 
-const defaultReporter = (target: ?HTMLElement) => ({
+const defaultReporter = (target) => ({
   width: target != null ? target.offsetWidth : null,
   height: target != null ? target.offsetHeight : null,
 });
 
 export default function useResizeAware(
-  reporter: typeof defaultReporter = defaultReporter
+  reporter = defaultReporter
 ) {
   const [sizes, setSizes] = React.useState({ width: null, height: null });
   const onResize = React.useCallback(ref => setSizes(reporter(ref.current)), [

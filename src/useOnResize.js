@@ -4,7 +4,7 @@ import * as React from 'react';
 // This is just an utility to cleanly attach a `resize` event listener
 // to a target HTMLObjectElement or HTMLIFrameElement
 // The real Hook is `useResizeAware.js`
-export default (ref: React.ElementRef<any>, onResize: () => void) => {
+export default (ref, onResize) => {
   React.useEffect(() => {
     const target = ref.current && ref.current.contentDocument && ref.current.contentDocument.defaultView;
 
