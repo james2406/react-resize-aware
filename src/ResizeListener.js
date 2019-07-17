@@ -2,6 +2,8 @@
 import * as React from 'react';
 import useOnResize from './useOnResize';
 
+const isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+
 const style = {
   display: 'block',
   opacity: 0,
@@ -25,15 +27,29 @@ export default ({
   const ref = React.useRef();
   useOnResize(ref, () => onResize(ref));
 
-  return (
-    <object
-      type="text/html"
-      style={style}
-      data="about:blank"
-      ref={ref}
-      aria-hidden={true}
-      aria-label="resize-listener"
-      tabIndex={-1}
-    />
-  );
+  if (isIE11) {
+    return (
+      <iframe
+        type="text/html"
+        style={style}
+        data="about:blank"
+        ref={ref}
+        aria-hidden={true}
+        aria-label="resize-listener"
+        tabIndex={-1}
+      />
+    );
+  } else {
+    return (
+      <object
+        type="text/html"
+        style={style}
+        data="about:blank"
+        ref={ref}
+        aria-hidden={true}
+        aria-label="resize-listener"
+        tabIndex={-1}
+      />
+    );
+  }
 };
